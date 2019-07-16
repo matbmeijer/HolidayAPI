@@ -1,0 +1,19 @@
+Package: HolidayAPI
+Type: Package
+Title: Holiday API R Wrapper
+Version: 0.0.9
+Authors@R: person("Matthias", "Brenninkmeijer", email =
+ "matthias@brennotten.net", role = c("aut", "cre"))
+Description: Holiday API R Wrapper making worldwide national and regional holidays
+    accessible to the R community in multiple languages.
+URL: http://github.com/matbmeijer/HolidayAPI
+BugReports: http://github.com/matbmeijer/HolidayAPI/issues
+Depends: R (>= 3.1.0) 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    httr,
+    jsonlite,
+    magrittr
+RoxygenNote: 6.1.1
