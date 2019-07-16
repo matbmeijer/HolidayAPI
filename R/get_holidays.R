@@ -5,7 +5,7 @@
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @examples
 #' \dontrun{
-#' gsave_key(key="7e647736-57b0-4f08-b324-d9f930945236")
+#' save_key(key="Y____OUR_API_KEY_HERE____")
 #' }
 #' @export
 save_key <-function(key){

@@ -17,7 +17,7 @@ Saves the key in the users environment as HOLIDAYAPI_PAT. It has the advantage t
 }
 \examples{
 \dontrun{
-gsave_key(key="7e647736-57b0-4f08-b324-d9f930945236")
+save_key(key="Y____OUR_API_KEY_HERE____")
 }
 }
 \author{
