@@ -39,69 +39,16 @@ This is a basic example showing how to obtain holiday data for Spain for
 
 ``` r
 library(HolidayAPI)
+#> 
+#> Attaching package: 'HolidayAPI'
+#> The following objects are masked from 'package:base':
+#> 
+#>     print, summary
 df<-get_holidays(country = "ES", year = 2018)
-
 summary(df)
-#>                     Length Class      Mode     
-#> status              1      -none-     numeric  
-#> response            1      -none-     character
-#> key                 1      -none-     character
-#> country             1      -none-     character
-#> year                1      -none-     numeric  
-#> month               0      -none-     NULL     
-#> day                 0      -none-     NULL     
-#> previous            0      -none-     NULL     
-#> upcoming            0      -none-     NULL     
-#> public              0      -none-     NULL     
-#> language            1      -none-     character
-#> request_url         1      -none-     character
-#> observations        1      -none-     numeric  
-#> holidays            5      data.frame list     
-#> requests_used       1      -none-     numeric  
-#> requests_reset_date 1      Date       numeric  
-#> requests_date       1      Date       numeric
-
+#> [1] "At date 2019-07-17, 16 holidays appear in ES during the year 2018, from which 10 are public."
 print(df)
-#> $status
-#> [1] 200
-#> 
-#> $response
-#> [1] "Success! Everything is A-OK"
-#> 
-#> $key
-#> [1] "7e647736-57b0-4f08-b324-d9f930945236"
-#> 
-#> $country
-#> [1] "ES"
-#> 
-#> $year
-#> [1] 2018
-#> 
-#> $month
-#> NULL
-#> 
-#> $day
-#> NULL
-#> 
-#> $previous
-#> NULL
-#> 
-#> $upcoming
-#> NULL
-#> 
-#> $public
-#> NULL
-#> 
-#> $language
-#> [1] "eng"
-#> 
-#> $request_url
-#> [1] "https://holidayapi.com/v1/holidays?key=7e647736-57b0-4f08-b324-d9f930945236&country=ES&year=2018"
-#> 
-#> $observations
-#> [1] 16
-#> 
-#> $holidays
+#> <Holiday API - Holidays - https://holidayapi.com/v1/holidays?key=7e647736-57b0-4f08-b324-d9f930945236&country=ES&year=2018>
 #>                                  name       date   observed public country
 #> 1                      New Year's Day 2018-01-01 2018-01-01   TRUE      ES
 #> 2                            Epiphany 2018-01-06 2018-01-06   TRUE      ES
@@ -119,16 +66,4 @@ print(df)
 #> 14 Feast of the Immaculate Conception 2018-12-08 2018-12-08   TRUE      ES
 #> 15                  December Solstice 2018-12-21 2018-12-21  FALSE      ES
 #> 16                      Christmas Day 2018-12-25 2018-12-25   TRUE      ES
-#> 
-#> $requests_used
-#> [1] 89
-#> 
-#> $requests_reset_date
-#> [1] "2019-08-01"
-#> 
-#> $requests_date
-#> [1] "2019-07-17"
-#> 
-#> attr(,"class")
-#> [1] "country_holidays" "list"
 ```

@@ -198,6 +198,7 @@ print <- function(x){
 #' @param x Must be a \code{country_holidays} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Prints a \code{country_holidays} class object.
+#' @export
 
 print.country_holidays <- function(x){
   cat("<Holiday API - Holidays - ", x$request_url, ">\n", sep = "")
@@ -209,6 +210,7 @@ print.country_holidays <- function(x){
 #' @param x Must be a \code{available_countries} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Prints a \code{available_countries} class object.
+#' @export
 
 print.available_countries <- function(x){
   cat("<Holiday API - Countries - ", x$request_url, ">\n", sep = "")
@@ -220,6 +222,7 @@ print.available_countries <- function(x){
 #' @param x Must be a \code{available_languages} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Prints a \code{available_languages} class object.
+#' @export
 
 print.available_languages <- function(x){
   cat("<Holiday API - Languages - ", x$request_url, ">\n", sep = "")
@@ -242,6 +245,7 @@ summary <- function(x){
 #' @param x Must be a \code{country_holidays} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Returns a summary of a \code{country_holidays} class object.
+#' @export
 
 summary.country_holidays <- function(x){
   res<-sprintf("At date %s, %s holidays appear in %s during the year %s, from which %s are public.",
@@ -258,6 +262,7 @@ summary.country_holidays <- function(x){
 #' @param x Must be a \code{available_countries} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Returns a summary of a \code{available_countries} class object.
+#' @export
 
 summary.available_countries <- function(x){
   res<-sprintf("At date %s, the Holiday API supports holiday information for %s countries and %s subdivisions.",
@@ -272,6 +277,7 @@ summary.available_countries <- function(x){
 #' @param x Must be a \code{available_languages} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Returns a summary of a \code{available_languages} class object.
+#' @export
 
 summary.available_languages <- function(x){
   res<-sprintf("At date %s, the Holiday API supports %s language formats.",

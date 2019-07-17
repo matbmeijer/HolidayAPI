@@ -41,9 +41,7 @@ This is a basic example showing how to obtain holiday data for Spain for 2018:
 ```{r example}
 library(HolidayAPI)
 df<-get_holidays(country = "ES", year = 2018)
-
 summary(df)
-
 print(df)
 ```
 
