@@ -287,4 +287,25 @@ summary.available_languages <- function(x){
   return(res)
 }
 
+#' @title Creates data.frame
+#' @description Creates a \code{data.frame} from a \code{country_holidays} class object
+#' @param x Must be a \code{country_holidays} object.
+#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
+#' @return Returns a \code{data.frame}
+#' @export
 
+as.data.frame <- function(x){
+  UseMethod("as.data.frame",x)
+}
+
+#' @title Creates data.frame
+#' @param x Must be a \code{available_languages} class object
+#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
+#' @return Returns a summary of a \code{available_languages} class object.
+#' @export
+#'
+as.data.frame.country_holidays <- function(x){
+  x$holidays$requests_date<-x$requests_date
+  return(x$holidays)
+  invisible(x)
+}

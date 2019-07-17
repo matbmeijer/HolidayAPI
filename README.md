@@ -35,7 +35,8 @@ save_key("____YOUR_API_KEY_HERE____")
 ```
 
 This is a basic example showing how to obtain holiday data for Spain for
-2018:
+2018. Piping is also possible, as well as converting holidays to a
+`data.frame`:
 
 ``` r
 library(HolidayAPI)
@@ -43,27 +44,29 @@ library(HolidayAPI)
 #> Attaching package: 'HolidayAPI'
 #> The following objects are masked from 'package:base':
 #> 
-#>     print, summary
+#>     as.data.frame, print, summary
 df<-get_holidays(country = "ES", year = 2018)
 summary(df)
 #> [1] "At date 2019-07-17, 16 holidays appear in ES during the year 2018, from which 10 are public."
-print(df)
-#> <Holiday API - Holidays - https://holidayapi.com/v1/holidays?key=7e647736-57b0-4f08-b324-d9f930945236&country=ES&year=2018>
-#>                                  name       date   observed public country
-#> 1                      New Year's Day 2018-01-01 2018-01-01   TRUE      ES
-#> 2                            Epiphany 2018-01-06 2018-01-06   TRUE      ES
-#> 3                        Father's Day 2018-03-19 2018-03-19  FALSE      ES
-#> 4                       March Equinox 2018-03-20 2018-03-20  FALSE      ES
-#> 5                         Good Friday 2018-03-30 2018-03-30   TRUE      ES
-#> 6                           Labor Day 2018-05-01 2018-05-01   TRUE      ES
-#> 7                        Mother's Day 2018-05-06 2018-05-06  FALSE      ES
-#> 8                       June Solstice 2018-06-21 2018-06-21  FALSE      ES
-#> 9                  Assumption of Mary 2018-08-15 2018-08-15   TRUE      ES
-#> 10                  September Equinox 2018-09-23 2018-09-23  FALSE      ES
-#> 11              Hispanic Heritage Day 2018-10-12 2018-10-12   TRUE      ES
-#> 12                    All Saints' Day 2018-11-01 2018-11-01   TRUE      ES
-#> 13            Day of the Constitution 2018-12-06 2018-12-06   TRUE      ES
-#> 14 Feast of the Immaculate Conception 2018-12-08 2018-12-08   TRUE      ES
-#> 15                  December Solstice 2018-12-21 2018-12-21  FALSE      ES
-#> 16                      Christmas Day 2018-12-25 2018-12-25   TRUE      ES
+class(df)
+#> [1] "country_holidays" "list"
+
+df2<-get_holidays(country = "FR", year = 2018) %>% as.data.frame()
+class(df2)
+#> [1] "data.frame"
+head(df2)
+#>                                     name       date   observed public
+#> 1                         New Year's Day 2018-01-01 2018-01-01   TRUE
+#> 2                          March Equinox 2018-03-20 2018-03-20  FALSE
+#> 3                          Easter Monday 2018-04-02 2018-04-02   TRUE
+#> 4                              Labor Day 2018-05-01 2018-05-01   TRUE
+#> 5                  Victory in Europe Day 2018-05-08 2018-05-08   TRUE
+#> 6 Feast of the Ascension of Jesus Christ 2018-05-10 2018-05-10   TRUE
+#>   country requests_date
+#> 1      FR    2019-07-17
+#> 2      FR    2019-07-17
+#> 3      FR    2019-07-17
+#> 4      FR    2019-07-17
+#> 5      FR    2019-07-17
+#> 6      FR    2019-07-17
 ```

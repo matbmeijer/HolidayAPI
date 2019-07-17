@@ -36,12 +36,16 @@ library(HolidayAPI)
 save_key("____YOUR_API_KEY_HERE____")
 ```
 
-This is a basic example showing how to obtain holiday data for Spain for 2018:
+This is a basic example showing how to obtain holiday data for Spain for 2018. Piping is also possible, as well as converting holidays to a `data.frame`:
 
 ```{r example}
 library(HolidayAPI)
 df<-get_holidays(country = "ES", year = 2018)
 summary(df)
-print(df)
+class(df)
+
+df2<-get_holidays(country = "FR", year = 2018) %>% as.data.frame()
+class(df2)
+head(df2)
 ```
 
