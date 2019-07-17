@@ -1,0 +1,49 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# HolidayAPI
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of HolidayAPI package is making worldwide holidays / bank days accessible to the R community. The package is an API wrapper of the [Holiday API](https://holidayapi.com/). You can see details of the API documentation and limitations at [https://holidayapi.com/docs](https://holidayapi.com/docs). Be aware that you need a key of the API, which you can get for free at [https://holidayapi.com/signup](https://holidayapi.com/signup).
+
+## Installation
+
+You can install the released version of HolidayAPI from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("matbmeijer/HolidayAPI")
+```
+## Example
+
+To work, you will need to save your API key - the package automatically loads the key for every function once you have saved the key:
+
+``` r
+library(HolidayAPI)
+save_key("____YOUR_API_KEY_HERE____")
+```
+
+This is a basic example showing how to obtain holiday data for Spain for 2018:
+
+```{r example}
+library(HolidayAPI)
+df<-get_holidays(country = "ES", year = 2018)
+
+summary(df)
+
+print(df)
+```
+
