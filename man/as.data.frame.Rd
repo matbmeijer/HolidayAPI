@@ -10,10 +10,10 @@ as.data.frame(x)
 \item{x}{Must be a \code{country_holidays} object.}
 }
 \value{
-Returns a \code{data.frame}
+Returns a base \code{data.frame}.
 }
 \description{
-Creates a \code{data.frame} from a \code{country_holidays} class object
+Creates a \code{data.frame} from a \code{country_holidays}, \code{available_countries} or \code{available_languages} class object.
 }
 \author{
 Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}

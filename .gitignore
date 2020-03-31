@@ -4,4 +4,13 @@
 .Ruserdata
 .DS_Store
 README.Rmd
-
+R/testing.R
+.api_key.json
+/*.tar.gz
+/*.Rcheck/
+.Rproj.user/
+.httr-oauth
+*_cache/
+/cache/
+.Renviron
+.Rbuildignore

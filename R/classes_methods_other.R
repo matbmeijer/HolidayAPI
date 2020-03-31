@@ -36,7 +36,7 @@ api_response<-function(status){
 #' @return Returns the inserted \code{data.frame} with the isocode as column attached.
 
 add_iso_code<-function(item, country_code){
-  if(is.null(item)){
+  if(is.null(item)||nrow(item)==0){
     item<-data.frame(code=NA, name=NA, languages=NA, country_code=country_code, stringsAsFactors = FALSE)
   } else {
     item$country_code<-country_code
@@ -57,12 +57,43 @@ nonvalues2NA<-function(item){
   return(item)
 }
 
+#' @title Unnest a nested \code{data.frame}
+#' @description Unnests/flattens a nested \code{data.frame}
+#' @param x A nested \code{data.frame} object
+#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
+#' @return Returns a flattened \code{data.frame}.
+
+unnest_df <- function(x) {
+  y <- do.call(data.frame, c(x, list(stringsAsFactors=FALSE)))
+  if("data.frame" %in% unlist(lapply(y, class))){
+    y<-unnest_df(y)
+  }
+  return(y)
+}
+
 #' @title Returns API default version
 #' @description Allows to easily adjust the versioning within the package
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Returns the package API version
 
 default_version <- function(){"v1"}
+
+#' @title Retrieves the key from users environment
+#' @description Retrieves the key assigned to the variable HOLIDAYAPI_PAT in the users environment.
+#' The key needs to be explicitly saved with the \code{save_key(key)} function.
+#' @return Returns the key from the users environment.
+#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
+#' @examples
+#' \dontrun{get_key()}
+
+get_key <- function(){
+  key <- Sys.getenv('HOLIDAYAPI_PAT', "")
+  if (key == "") {
+    stop("Unable to find the HOLIDAYAPI_PAT in the environment variables. Remember to save the key with the save_key(key) function.")
+  }
+  obj<-structure(key, class =c("holiday_api_key", "character"))
+  invisible(obj)
+}
 
 #' @title Convert to \code{country_holidays} class
 #' @description Convert call response to an internal \code{country_holidays} class object, formatting the response to ease tha holidays analysis.
@@ -140,7 +171,6 @@ as_available_countries<-function(request_url, key, call, ...){
                         by.y = "country_code",
                         suffixes = c("_countries", "_subdivisions"),
                         all.x = TRUE)
-
   obj<-structure(
     list(
       status=call$status,
@@ -185,47 +215,58 @@ as_available_languages<-function(request_url, key, call, ...){
 }
 
 #' @title Print Holiday API classes
-#' @param x Can be a \code{country_holidays}, \code{available_countries} or \code{available_languages} object.
+#' @param x Can be a \code{country_holidays}, \code{available_countries}, \code{available_languages} or \code{HolidayAPI_key} object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Prints a Holiday API class.
 #' @export
 
 print <- function(x){
-  UseMethod("print",x)
+  UseMethod("print", x)
 }
 
-#' @title Print a \code{country_holidays} class
+#' @title Print a \code{holiday_api_key} class object
+#' @param x Must be a \code{holiday_api_key} class object.
+#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
+#' @return Prints a \code{holiday_api_key} class object.
+#' @export
+
+print.holiday_api_key <- function(x){
+  print("API keys are stored to the assigned object, but purposefully not printed out to protect the users' credentials.")
+  invisible(x)
+}
+
+#' @title Print function for the \code{country_holidays} class object
 #' @param x Must be a \code{country_holidays} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Prints a \code{country_holidays} class object.
 #' @export
 
 print.country_holidays <- function(x){
-  cat("<Holiday API - Holidays - ", x$request_url, ">\n", sep = "")
+  cat("<Holiday API - Holidays>\n<", x$request_url, ">\n", sep = "")
   print(x$holidays)
   invisible(x)
 }
 
-#' @title Print a \code{available_countries} class
+#' @title Print a \code{available_countries} class object
 #' @param x Must be a \code{available_countries} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Prints a \code{available_countries} class object.
 #' @export
 
 print.available_countries <- function(x){
-  cat("<Holiday API - Countries - ", x$request_url, ">\n", sep = "")
+  cat("<Holiday API - Countries>\n<", x$request_url, ">\n", sep = "")
   print(x$countries)
   invisible(x)
 }
 
-#' @title Print a \code{available_languages} class
+#' @title Print a \code{available_languages} class object
 #' @param x Must be a \code{available_languages} class object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Prints a \code{available_languages} class object.
 #' @export
 
 print.available_languages <- function(x){
-  cat("<Holiday API - Languages - ", x$request_url, ">\n", sep = "")
+  cat("<Holiday API - Languages>\n<", x$request_url, ">\n", sep = "")
   print(x$languages)
   invisible(x)
 }
@@ -239,7 +280,6 @@ print.available_languages <- function(x){
 summary <- function(x){
   UseMethod("summary",x)
 }
-
 
 #' @title Summary of a \code{country_holidays} class
 #' @param x Must be a \code{country_holidays} class object.
@@ -280,7 +320,7 @@ summary.available_countries <- function(x){
 #' @export
 
 summary.available_languages <- function(x){
-  res<-sprintf("At date %s, the Holiday API supports %s language formats.",
+  res<-sprintf("At date %s, the Holiday API supports %s distinct language formats.",
                x$requests_date,
                length(unique(x$languages$name))
   )
@@ -288,10 +328,10 @@ summary.available_languages <- function(x){
 }
 
 #' @title Creates data.frame
-#' @description Creates a \code{data.frame} from a \code{country_holidays} class object
+#' @description Creates a \code{data.frame} from a \code{country_holidays}, \code{available_countries} or \code{available_languages} class object.
 #' @param x Must be a \code{country_holidays} object.
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
-#' @return Returns a \code{data.frame}
+#' @return Returns a base \code{data.frame}.
 #' @export
 
 as.data.frame <- function(x){
@@ -299,13 +339,37 @@ as.data.frame <- function(x){
 }
 
 #' @title Creates data.frame
+#' @param x Must be a \code{country_holidays} class object
+#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
+#' @return Returns a \code{data.frame}.
+#' @export
+
+as.data.frame.country_holidays <- function(x){
+  y<-unnest_df(x$holidays)
+  y$requests_date<-x$requests_date
+  return(y)
+}
+
+#' @title Creates data.frame
+#' @param x Must be a \code{available_countries} class object
+#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
+#' @return Returns a \code{data.frame}.
+#' @export
+
+as.data.frame.available_countries <- function(x){
+  y<-unnest_df(x$countries)
+  y$requests_date<-x$requests_date
+  return(y)
+}
+
+#' @title Creates data.frame
 #' @param x Must be a \code{available_languages} class object
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
-#' @return Returns a summary of a \code{available_languages} class object.
+#' @return Returns a \code{data.frame}.
 #' @export
-#'
-as.data.frame.country_holidays <- function(x){
-  x$holidays$requests_date<-x$requests_date
-  return(x$holidays)
-  invisible(x)
+
+as.data.frame.available_languages <- function(x){
+  y<-unnest_df(x$languages)
+  y$requests_date<-x$requests_date
+  return(y)
 }

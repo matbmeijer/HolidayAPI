@@ -20,14 +20,14 @@ Returns a \code{available_languages} object containing the
 Additionally, relevant information about the API request is shown.
 }
 \description{
-Retrieve all 100 for which the Holiday API has holidays translation available.
+Retrieve all 100 languages for which the Holiday API has holidays translation available.
 By default returns english. Useful to pass on later on \code{to get_holidays()} function.
 }
 \section{Warning}{
 
-Depending on the subscription plan the scope of the API changes. At date 2019-07-01 the free plan
- is limited to historical data for 2018 with 10.000 monthly requests in english language format only.
- Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.-
+Depending on the subscription plan the scope of the API changes. At date 2020-04-01 the free plan
+is limited to historical data for the previous year with 10.000 monthly requests in english language format only.
+Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.
 }
 
 \examples{

@@ -30,7 +30,7 @@ it is not required to pass. It is a required parameter in \code{character} forma
 \item \code{public} - Return only \href{https://en.wikipedia.org/wiki/Public_holiday}{public holidays}.
 It is an optional parameter format in boolean format.
 \item \code{language} - By default English language, optionally other languages in ISO 639-1 language
-#'  format can be passed (with exceptions). It is an optional parameter format in \code{character} format.
+format can be passed (with exceptions). It is an optional parameter format in \code{character} format.
 }}
 }
 \value{
@@ -43,9 +43,9 @@ By default the JSON format is selected because it contains additional request in
 }
 \section{Warning}{
 
-Depending on the subscription plan the scope of the API changes. At date 2019-07-01 the free plan
-is limited to historical data for 2018 with 10.000 monthly requests in english language format only.
- Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.
+Depending on the subscription plan the scope of the API changes. At date 2020-04-01 the free plan
+is limited to historical data for the previous year from current year with 10.000 monthly requests in english language format only.
+Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.
 }
 
 \examples{

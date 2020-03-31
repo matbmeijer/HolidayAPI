@@ -1,5 +1,10 @@
+^README\.Rmd$
+^\.Rhistory$
+^LICENSE\.md$
+^\.api_key\.json$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^NEWS\.md$
+^\.travis\.yml$  
 ^CODE_OF_CONDUCT\.md$
-^LICENSE\.md$
-^README\.Rmd$
+^testing_building\.R$

@@ -2,7 +2,7 @@
 % Please edit documentation in R/classes_methods_other.R
 \name{print.available_languages}
 \alias{print.available_languages}
-\title{Print a \code{available_languages} class}
+\title{Print a \code{available_languages} class object}
 \usage{
 \method{print}{available_languages}(x)
 }
@@ -13,7 +13,7 @@
 Prints a \code{available_languages} class object.
 }
 \description{
-Print a \code{available_languages} class
+Print a \code{available_languages} class object
 }
 \author{
 Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}

@@ -7,7 +7,7 @@
 print(x)
 }
 \arguments{
-\item{x}{Can be a \code{country_holidays}, \code{available_countries} or \code{available_languages} object.}
+\item{x}{Can be a \code{country_holidays}, \code{available_countries}, \code{available_languages} or \code{HolidayAPI_key} object.}
 }
 \value{
 Prints a Holiday API class.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/classes_methods_other.R
 \name{print.available_countries}
 \alias{print.available_countries}
-\title{Print a \code{available_countries} class}
+\title{Print a \code{available_countries} class object}
 \usage{
 \method{print}{available_countries}(x)
 }
@@ -13,7 +13,7 @@
 Prints a \code{available_countries} class object.
 }
 \description{
-Print a \code{available_countries} class
+Print a \code{available_countries} class object
 }
 \author{
 Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}

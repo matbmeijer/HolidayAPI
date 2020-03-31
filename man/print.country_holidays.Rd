@@ -2,7 +2,7 @@
 % Please edit documentation in R/classes_methods_other.R
 \name{print.country_holidays}
 \alias{print.country_holidays}
-\title{Print a \code{country_holidays} class}
+\title{Print function for the \code{country_holidays} class object}
 \usage{
 \method{print}{country_holidays}(x)
 }
@@ -13,7 +13,7 @@
 Prints a \code{country_holidays} class object.
 }
 \description{
-Print a \code{country_holidays} class
+Print function for the \code{country_holidays} class object
 }
 \author{
 Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}

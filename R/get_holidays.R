@@ -12,21 +12,6 @@ save_key <-function(key){
   Sys.setenv(HOLIDAYAPI_PAT=key)
 }
 
-#' @title Retrieves the key from users environment
-#' @description Retrieves the key assigned to the variable HOLIDAYAPI_PAT in the users environment.
-#' The key needs to be explicitly saved with the \code{save_key(key)} function.
-#' @return Returns the key from the users environment.
-#' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
-#' @examples
-#' \dontrun{get_key()}
-
-get_key <- function(){
-  key <- Sys.getenv('HOLIDAYAPI_PAT', "")
-  if (key == "") {
-    stop("Unable to find the HOLIDAYAPI_PAT in the environment variables. Remember to save the key with the save_key(key) function.")
-  }
-  return(key)
-}
 
 #' @title Retrieve holidays
 #' @description Retrieve a list of holidays from a given country in a given year.
@@ -48,7 +33,7 @@ get_key <- function(){
 #' \item \code{public} - Return only \href{https://en.wikipedia.org/wiki/Public_holiday}{public holidays}.
 #' It is an optional parameter format in boolean format.
 #' \item \code{language} - By default English language, optionally other languages in ISO 639-1 language
-#' #'  format can be passed (with exceptions). It is an optional parameter format in \code{character} format.
+#' format can be passed (with exceptions). It is an optional parameter format in \code{character} format.
 #' }
 #' @author Matthias Brenninkmeijer - \href{https://github.com/matbmeijer}{https://github.com/matbmeijer}
 #' @return Returns a \code{country_holidays} object containing the dates, names of holidays, if they
@@ -59,9 +44,9 @@ get_key <- function(){
 #' get_holidays(country="ES", year=2018)
 #' }
 #' @section Warning:
-#' Depending on the subscription plan the scope of the API changes. At date 2019-07-01 the free plan
-#' is limited to historical data for 2018 with 10.000 monthly requests in english language format only.
-#'  Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.
+#' Depending on the subscription plan the scope of the API changes. At date 2020-04-01 the free plan
+#' is limited to historical data for the previous year from current year with 10.000 monthly requests in english language format only.
+#' Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.
 #' @export
 
 get_holidays<-function(country,
@@ -108,7 +93,7 @@ get_holidays<-function(country,
 }
 
 #' @title Retrieve available countries
-#' @description Retrieve all 249 for which the Holiday API has holidays available.
+#' @description Retrieve all 249 countries for which the Holiday API has holidays available.
 #' Useful to pass on later on \code{to get_holidays()} function. By default the JSON format
 #'  is selected because it contains additional request information.
 #' @param key The users API key obtained when registering at \href{https://holidayapi.com/signup}{}.
@@ -125,9 +110,9 @@ get_holidays<-function(country,
 #' get_countries()
 #' }
 #' @section Warning:
-#' Depending on the subscription plan the scope of the API changes. At date 2019-07-01 the
-#' free plan is limited to historical data for 2018 with 10.000 monthly requests in english
-#' language format only. Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.-
+#' Depending on the subscription plan the scope of the API changes. At date 2020-04-01 the
+#' free plan is limited to historical data for the previous year with 10.000 monthly requests in english
+#' language format only. Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.
 #' @export
 
 get_countries<-function(key=get_key()){
@@ -146,7 +131,6 @@ get_countries<-function(key=get_key()){
       stop(sprintf("Error Code %s - %s", call$status_code, api_response(call$status_code)))
     }
   }
-
   obj<-as_available_countries(request_url = request_url,
                               key = key,
                               call = call,
@@ -155,7 +139,7 @@ get_countries<-function(key=get_key()){
 }
 
 #' @title Retrieve available languages
-#' @description Retrieve all 100 for which the Holiday API has holidays translation available.
+#' @description Retrieve all 100 languages for which the Holiday API has holidays translation available.
 #' By default returns english. Useful to pass on later on \code{to get_holidays()} function.
 #' @param key The users API key obtained when registering at \href{https://holidayapi.com/signup}{}.
 #' If the key has been saved to the environment before using the \code{save_key(key)} function, it is not required to pass.
@@ -171,9 +155,9 @@ get_countries<-function(key=get_key()){
 #' get_languages()
 #' }
 #' @section Warning:
-#' Depending on the subscription plan the scope of the API changes. At date 2019-07-01 the free plan
-#'  is limited to historical data for 2018 with 10.000 monthly requests in english language format only.
-#'  Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.-
+#' Depending on the subscription plan the scope of the API changes. At date 2020-04-01 the free plan
+#' is limited to historical data for the previous year with 10.000 monthly requests in english language format only.
+#' Non-commercial use only. For more, updated information go \href{https://holidayapi.com/}{here}.
 #' @export
 
 get_languages<-function(key=get_key()){
